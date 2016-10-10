@@ -1,0 +1,28 @@
+{
+  "name": "tvmaze-api",
+  "version": "1.0.0",
+  "description": "A TVMaze API wrapper for NodeJS.",
+  "dependencies": {
+    "request": "^2.75.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --timeout 15000 --reporter spec"
+  },
+  "engines": {
+    "node": ">=6.3.0"
+  },
+  "keywords": [
+    "tvmaze",
+    "api"
+  ],
+  "main": "tvmaze-api.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisAlderson/tvmaze-api.git"
+  }
+}
