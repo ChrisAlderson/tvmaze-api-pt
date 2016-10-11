@@ -1,13 +1,14 @@
 "use strict";
 
 const request = require("request");
+const querystring = require("querystring");
 
 const defaultOptions = {
   baseUrl: "http://api.tvmaze.com/",
   timeout: 4 * 1000
 };
 
-module.export = class TVMaze {
+module.exports = class TVMazeAPI {
 
   constructor({options = defaultOptions, debug = false} = {}) {
     this._request = request.defaults(options);
@@ -18,7 +19,7 @@ module.export = class TVMaze {
 
   _get(uri, qs, retry = true) {
     if (this._debug) console.warn(`Making request to uri: ${uri}, qs: '${querystring.stringify(qs)}'`);
-    return new Promise((reject, resolve) => {
+    return new Promise((resolve, reject) => {
       return this._request({ uri, qs }, (err, res, body) => {
         if (err && retry) {
           return resolve(this._get(uri, qs, false));
@@ -49,7 +50,7 @@ module.export = class TVMaze {
   }
 
   lookupShow({tvrage, thetvdb, imdb}) {
-    if (!tvrage && thetvdb && !imdb) throw new Error("Specify a tvrage, thetvdb or imdb id for this request");
+    if (!tvrage && !thetvdb && !imdb) throw new Error("Specify a tvrage, thetvdb or imdb id for this request");
     return this._get("lookup/shows", { tvrage, thetvdb, imdb });
   }
 
@@ -58,7 +59,7 @@ module.export = class TVMaze {
     return this._get(`shows/${id}`, { embed });
   }
 
-  getEpisodes(id, specials) {
+  getEpisodes({id, specials}) {
     if (!id) throw new Error(`${id} is not a valid value for id!`);
     specials = specials ? 1 : 0;
     return this._get(`shows/${id}/episodes`, { specials });
@@ -69,37 +70,36 @@ module.export = class TVMaze {
     if (!season) throw new Error(`${season} is not a valid value for season!`);
     if (!episode) throw new Error(`${episode} is not a valid value for episode!`);
     return this._get(`shows/${id}/episodebynumber`, { season, number: episode });
-
   }
 
   getEpisodeByDate({id, date}) {
     if (!id) throw new Error(`${id} is not a valid value for id!`);
-    if (!date.match(this._iso8601))
+    if (!date.match(this._iso8601)) throw new Error(`${date} is not a ISO 8601 date`);
     return this._get(`shows/${id}/episodesbydate`, { date });
   }
 
-  getSeasons(id) {
+  getSeasons({id}) {
     if (!id) throw new Error(`${id} is not a valid value for id!`);
     return this._get(`shows/${id}/seasons`);
   }
 
-  getCast() {
+  getCast({id}) {
     if (!id) throw new Error(`${id} is not a valid value for id!`);
     return this._get(`shows/${id}/cast`);
   }
 
-  getCrew() {
+  getCrew({id}) {
     if (!id) throw new Error(`${id} is not a valid value for id!`);
     return this._get(`shows/${id}/crew`);
   }
 
-  getAliases() {
+  getAliases({id}) {
     if (!id) throw new Error(`${id} is not a valid value for id!`);
     return this._get(`shows/${id}/akas`);
   }
 
   getPage(page) {
-    if (!page || typeof(page) !== "number") throw new Error(``);
+    if (!page || typeof(page) !== "number") throw new Error(`Page needs to be a number.`);
     return this._get("shows", { page });
   }
 
@@ -117,13 +117,12 @@ module.export = class TVMaze {
     return this._get("updates/shows");
   }
 
-  getSchedule({id, country, date}) {
-    if (!id) throw new Error(`${id} is not a valid value for id!`);
-    if (date && !date.match(this._iso8601)) throw new Error();
-    return this._get("schedule", { country, date })
+  getSchedule({country, date}) {
+    if (date && !date.match(this._iso8601)) throw new Error(`${date} is not a ISO 8601 date`);
+    return this._get("schedule", { country, date });
   }
 
-  getFullSchedule() {
+  getFullSchedule({id}) {
     if (!id) throw new Error(`${id} is not a valid value for id!`);
     return this._get(`schedule/full`);
   }
