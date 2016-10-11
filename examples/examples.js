@@ -1,6 +1,6 @@
 "use strict";
 
-const TVMazeAPI = require("../tvmaze-api");
+const TVMazeAPI = require("../tvmaze-api-pt");
 
 let tvMaze = new TVMazeAPI();
 

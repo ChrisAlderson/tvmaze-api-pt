@@ -1,8 +1,8 @@
-# extratorrent-api
+# tvmaze-api-pt
 
-[![Build Status](https://travis-ci.org/ChrisAlderson/tvmaze-api.svg?branch=master)]()
-[![Dependency Status](https://david-dm.org/ChrisAlderson/tvmaze-api.svg)](https://david-dm.org/ChrisAlderson/tvmaze-api)
-[![devDependency Status](https://david-dm.org/ChrisAlderson/tvmaze-api/dev-status.svg)](https://david-dm.org/ChrisAlderson/tvmaze-api#info=devDependencies)
+[![Build Status](https://travis-ci.org/ChrisAlderson/tvmaze-api-pt.svg?branch=master)]()
+[![Dependency Status](https://david-dm.org/ChrisAlderson/tvmaze-api-pt.svg)](https://david-dm.org/ChrisAlderson/tvmaze-api-pt)
+[![devDependency Status](https://david-dm.org/ChrisAlderson/tvmaze-api-pt/dev-status.svg)](https://david-dm.org/ChrisAlderson/tvmaze-api-pt#info=devDependencies)
 
 An TVMaze wrapper for NodeJS.
 
@@ -10,12 +10,12 @@ An TVMaze wrapper for NodeJS.
 
 #### Setup
 ```
-npm install --save tvmaze-api
+npm install --save tvmaze-api-pt
 ```
 
 ### Initialize
 ```js
-const TVMazeAPI = require("tvmaze-api");
+const TVMazeAPI = require("tvmaze-api-pt");
 
 // Options are the request default options.
 const tvmazeAPI = new TVMazeAPI();
@@ -48,7 +48,7 @@ const tvmazeAPI = new TVMazeAPI();
 
 MIT License
 
-Copyright (c) 2016 - tvmaze-api - Released under the MIT license.
+Copyright (c) 2016 - tvmaze-api-pt - Released under the MIT license.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

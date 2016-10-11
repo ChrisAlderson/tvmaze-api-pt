@@ -1,5 +1,5 @@
 {
-  "name": "tvmaze-api",
+  "name": "tvmaze-api-pt",
   "version": "1.0.0",
   "description": "A TVMaze API wrapper for NodeJS.",
   "dependencies": {
@@ -20,9 +20,9 @@
     "tvmaze",
     "api"
   ],
-  "main": "tvmaze-api.js",
+  "main": "tvmaze-api-pt.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChrisAlderson/tvmaze-api.git"
+    "url": "git+https://github.com/ChrisAlderson/tvmaze-api-pt.git"
   }
 }

@@ -2,7 +2,7 @@
 
 const chai = require("chai");
 const assert = chai.assert;
-const TVMazeAPI = require("../tvmaze-api");
+const TVMazeAPI = require("../tvmaze-api-pt");
 
 describe("TVMaze", () => {
 
