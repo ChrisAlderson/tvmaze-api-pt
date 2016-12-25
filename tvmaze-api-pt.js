@@ -1,7 +1,7 @@
 'use strict';
 
-const request = require('request');
 const querystring = require('querystring');
+const request = require('request');
 
 const defaultOptions = {
   baseUrl: 'http://api.tvmaze.com/',
