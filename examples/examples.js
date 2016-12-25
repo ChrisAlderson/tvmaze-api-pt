@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const TVMazeAPI = require("../tvmaze-api-pt");
+const TVMazeAPI = require('../tvmaze-api-pt');
 
 let tvMaze = new TVMazeAPI();
 
@@ -27,7 +27,7 @@ const thetvdb = tvMaze.lookupShow({
   thetvdb: 81189
  });
 const imdb = tvMaze.lookupShow({
-  imdb: "tt0944947"
+  imdb: 'tt0944947'
  });
 
 Promise.all([tvrage, thetvdb, imdb])
@@ -37,7 +37,7 @@ Promise.all([tvrage, thetvdb, imdb])
 
 tvMaze.getShow({
   id: 24,
-  embed: "episodes"
+  embed: 'episodes'
 }).then(res => console.log(res))
   .catch(err => console.error(err));
 
@@ -59,7 +59,7 @@ tvMaze.getEpisodeByNumber({
 
 tvMaze.getEpisodeByDate({
   id: 24,
-  date: "2010-09-20"
+  date: '2010-09-20'
 }).then(res => console.log(res))
   .catch(err => console.error(err));
 
@@ -95,14 +95,14 @@ tvMaze.getPage(1)
 
 tvMaze.getPerson({
   id: 24,
-  embed: "episodes"
+  embed: 'episodes'
 }).then(res => console.log(res))
   .catch(err => console.error(err));
 
 
 tvMaze.getCastCredits({
   id: 1,
-  embed: "castcredits"
+  embed: 'castcredits'
 }).then(res => console.log(res))
   .catch(err => console.error(err));
 
@@ -113,8 +113,8 @@ tvMaze.showUpdates()
 
 
 tvMaze.getSchedule({
-  country: "US",
-  date: "2014-12-01"
+  country: 'US',
+  date: '2014-12-01'
 }).then(res => console.log(res))
   .catch(err => console.error(err));
 

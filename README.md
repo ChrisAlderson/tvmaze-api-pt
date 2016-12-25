@@ -15,7 +15,7 @@ npm install --save tvmaze-api-pt
 
 ### Initialize
 ```js
-const TVMazeAPI = require("tvmaze-api-pt");
+const TVMazeAPI = require('tvmaze-api-pt');
 
 // Options are the request default options.
 const tvmazeAPI = new TVMazeAPI();

@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-const request = require("request");
-const querystring = require("querystring");
+const request = require('request');
+const querystring = require('querystring');
 
 const defaultOptions = {
-  baseUrl: "http://api.tvmaze.com/",
+  baseUrl: 'http://api.tvmaze.com/',
   timeout: 4 * 1000
 };
 
@@ -36,22 +36,22 @@ module.exports = class TVMazeAPI {
 
   searchShows(q) {
     if (!q) throw new Error(`${q} is not a valid value for q!`);
-    return this._get("/search/shows", { q });
+    return this._get('/search/shows', { q });
   }
 
   searchPeople(q) {
     if (!q) throw new Error(`${q} is not a valid value for q!`);
-    return this._get("/search/people", { q });
+    return this._get('/search/people', { q });
   }
 
   singleSearchShow(q) {
     if (!q) throw new Error(`${q} is not a valid value for q!`);
-    return this._get("/singlesearch/shows", { q });
+    return this._get('/singlesearch/shows', { q });
   }
 
   lookupShow({tvrage, thetvdb, imdb}) {
-    if (!tvrage && !thetvdb && !imdb) throw new Error("Specify a tvrage, thetvdb or imdb id for this request");
-    return this._get("lookup/shows", { tvrage, thetvdb, imdb });
+    if (!tvrage && !thetvdb && !imdb) throw new Error('Specify a tvrage, thetvdb or imdb id for this request');
+    return this._get('lookup/shows', { tvrage, thetvdb, imdb });
   }
 
   getShow({id, embed}) {
@@ -99,8 +99,8 @@ module.exports = class TVMazeAPI {
   }
 
   getPage(page) {
-    if (!page || typeof(page) !== "number") throw new Error(`Page needs to be a number.`);
-    return this._get("shows", { page });
+    if (!page || typeof(page) !== 'number') throw new Error(`Page needs to be a number.`);
+    return this._get('shows', { page });
   }
 
   getPerson({id, embed}) {
@@ -114,12 +114,12 @@ module.exports = class TVMazeAPI {
   }
 
   showUpdates() {
-    return this._get("updates/shows");
+    return this._get('updates/shows');
   }
 
   getSchedule({country, date}) {
     if (date && !date.match(this._iso8601)) throw new Error(`${date} is not a ISO 8601 date`);
-    return this._get("schedule", { country, date });
+    return this._get('schedule', { country, date });
   }
 
   getFullSchedule({id}) {

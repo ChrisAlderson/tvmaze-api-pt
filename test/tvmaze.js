@@ -1,39 +1,39 @@
-"use strict";
+'use strict';
 
-const chai = require("chai");
+const chai = require('chai');
 const assert = chai.assert;
-const TVMazeAPI = require("../tvmaze-api-pt");
+const TVMazeAPI = require('../tvmaze-api-pt');
 
-describe("TVMaze", () => {
+describe('TVMaze', () => {
 
   let tvMaze, q;
   before(() => {
     tvMaze = new TVMazeAPI();
-    q = "Lost";
+    q = 'Lost';
   });
 
-  it("searchShows", done => {
+  it('searchShows', done => {
     tvMaze.searchShows(q).then(res => {
       assert.isArray(res);
       done();
     }).catch(err => done(err));
   });
 
-  it("searchPeople", done => {
+  it('searchPeople', done => {
     tvMaze.searchPeople(q).then(res => {
       assert.isArray(res);
       done();
     }).catch(err => done(err));
   });
 
-  it("singleSearchShow", done => {
+  it('singleSearchShow', done => {
     tvMaze.singleSearchShow(q).then(res => {
       assert.isObject(res);
       done();
     }).catch(err => done(err));
   });
 
-  it("lookupShow", done => {
+  it('lookupShow', done => {
     const tvrage = tvMaze.lookupShow({
       tvrage: 24493
      });
@@ -41,7 +41,7 @@ describe("TVMaze", () => {
       thetvdb: 81189
      });
     const imdb = tvMaze.lookupShow({
-      imdb: "tt0944947"
+      imdb: 'tt0944947'
      });
 
     Promise.all([tvrage, thetvdb, imdb]).then(res => {
@@ -52,17 +52,17 @@ describe("TVMaze", () => {
     }).catch(err => done(err));
   });
 
-  it("getShow", done => {
+  it('getShow', done => {
     tvMaze.getShow({
       id: 24,
-      embed: "episodes"
+      embed: 'episodes'
     }).then(res => {
       assert.isObject(res);
       done();
     }).catch(err => done(err));
   });
 
-  it("getEpisodes", done => {
+  it('getEpisodes', done => {
     tvMaze.getEpisodes({
       id: 24,
       specials: true
@@ -72,7 +72,7 @@ describe("TVMaze", () => {
     }).catch(err => done(err));
   });
 
-  it("getEpisodeByNumber", done => {
+  it('getEpisodeByNumber', done => {
     tvMaze.getEpisodeByNumber({
       id: 24,
       season: 1,
@@ -83,17 +83,17 @@ describe("TVMaze", () => {
     }).catch(err => done(err));
   });
 
-  it("getEpisodeByDate", done => {
+  it('getEpisodeByDate', done => {
     tvMaze.getEpisodeByDate({
       id: 24,
-      date: "2010-09-20"
+      date: '2010-09-20'
     }).then(res => {
       assert.isArray(res);
       done();
     }).catch(err => done(err));
   });
 
-  it("getSeasons", done => {
+  it('getSeasons', done => {
     tvMaze.getSeasons({
       id: 24
     }).then(res => {
@@ -102,7 +102,7 @@ describe("TVMaze", () => {
     }).catch(err => done(err));
   });
 
-  it("getCast", done => {
+  it('getCast', done => {
     tvMaze.getCast({
       id: 24
     }).then(res => {
@@ -111,7 +111,7 @@ describe("TVMaze", () => {
     }).catch(err => done(err));
   });
 
-  it("getCrew", done => {
+  it('getCrew', done => {
     tvMaze.getCrew({
       id: 24
     }).then(res => {
@@ -120,7 +120,7 @@ describe("TVMaze", () => {
     }).catch(err => done(err));
   });
 
-  it("getAliases", done => {
+  it('getAliases', done => {
     tvMaze.getAliases({
       id: 24
     }).then(res => {
@@ -129,51 +129,51 @@ describe("TVMaze", () => {
     }).catch(err => done(err));
   });
 
-  it("getPage", done => {
+  it('getPage', done => {
     tvMaze.getPage(1).then(res => {
       assert.isArray(res);
       done();
     }).catch(err => done(err));
   });
 
-  it("getPerson", done => {
+  it('getPerson', done => {
     tvMaze.getPerson({
       id: 24,
-      embed: "episodes"
+      embed: 'episodes'
     }).then(res => {
       assert.isArray(res);
       done();
     }).catch(err => done(err));
   });
 
-  it("getCastCredits", done => {
+  it('getCastCredits', done => {
     tvMaze.getCastCredits({
       id: 1,
-      embed: "castcredits"
+      embed: 'castcredits'
     }).then(res => {
       assert.isArray(res);
       done();
     }).catch(err => done(err));
   });
 
-  it("showUpdates", done => {
+  it('showUpdates', done => {
     tvMaze.showUpdates().then(res => {
       assert.isObject(res);
       done();
     }).catch(err => done(err));
   });
 
-  it("getSchedule", done => {
+  it('getSchedule', done => {
     tvMaze.getSchedule({
-      country: "US",
-      date: "2014-12-01"
+      country: 'US',
+      date: '2014-12-01'
     }).then(res => {
       assert.isArray(res);
       done();
     }).catch(err => done(err));
   });
 
-  it("getFullSchedule", done => {
+  it('getFullSchedule', done => {
     tvMaze.getFullSchedule({
       id: 24
     }).then(res => {
