@@ -1,6 +1,6 @@
 {
   "name": "tvmaze-api-pt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A TVMaze API wrapper for NodeJS.",
   "dependencies": {
     "request": "^2.79.0"
