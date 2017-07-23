@@ -17,8 +17,10 @@ npm install --save tvmaze-api-pt
 ```js
 const TVMazeAPI = require('tvmaze-api-pt');
 
-// Options are the request default options.
-const tvmazeAPI = new TVMazeAPI();
+const tvMaze = new TVMazeAPI({
+  baseUrl, // The base url of eztv. Defaults to 'https://horriblesubs.info/'
+  debug // Show extra output. Defaults to 'false'
+})
 ```
 
 ### Methods
