@@ -1,10 +1,12 @@
 # tvmaze-api-pt
 
-[![Build Status](https://travis-ci.org/ChrisAlderson/tvmaze-api-pt.svg?branch=master)]()
+[![Build Status](https://travis-ci.org/ChrisAlderson/tvmaze-api-pt.svg?branch=master)](https://travis-ci.org/ChrisAlderson/tvmaze-api-pt)
+[![Coverage Status](https://coveralls.io/repos/github/ChrisAlderson/tvmaze-api-pt/badge.svg?branch=master)](https://coveralls.io/github/ChrisAlderson/tvmaze-api-pt?branch=master)
 [![Dependency Status](https://david-dm.org/ChrisAlderson/tvmaze-api-pt.svg)](https://david-dm.org/ChrisAlderson/tvmaze-api-pt)
 [![devDependency Status](https://david-dm.org/ChrisAlderson/tvmaze-api-pt/dev-status.svg)](https://david-dm.org/ChrisAlderson/tvmaze-api-pt#info=devDependencies)
 
-An TVMaze wrapper for NodeJS.
+An [TVMaze](http://tvmaze.com/) wrapper for NodeJS. For more information on the
+API you can check the TVMaze documentation [here](http://www.tvmaze.com/api).
 
 ## Usage
 
@@ -46,11 +48,18 @@ const tvMaze = new TVMazeAPI({
  - getFullSchedule({id})
 ```
 
+## Testing
+
+You can run tests with the following npm command:
+```
+ $ npm test
+```
+
 # License
 
 MIT License
 
-Copyright (c) 2016 - tvmaze-api-pt - Released under the MIT license.
+Copyright (c) 2017 - tvmaze-api-pt - Released under the MIT license.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
