@@ -175,13 +175,13 @@ describe('TvMazeApi', () => {
   it('should throw an error when getting an episode by number', () => {
     expect(
       tvMaze.getEpisodeByNumber.bind(tvMaze.getEpisodeByNumber, 24, undefined
-    )).to.throw('undefined is not a valid value for season!')
+      )).to.throw('undefined is not a valid value for season!')
     expect(
       tvMaze.getEpisodeByNumber.bind(tvMaze.getEpisodeByNumber,
-      24,
-      1,
-      undefined
-    )).to.throw('undefined is not a valid value for episode!')
+        24,
+        1,
+        undefined
+      )).to.throw('undefined is not a valid value for episode!')
   })
 
   /** @test {TvMazeApi#getEpisodeByDate} */
@@ -196,7 +196,7 @@ describe('TvMazeApi', () => {
   it('should throw an error when getting an episode by date', () => {
     expect(
       tvMaze.getEpisodeByDate.bind(tvMaze.getEpisodeByDate, 24, '20-09-2010'
-    )).to.throw('20-09-2010 is not a ISO 8601 date!')
+      )).to.throw('20-09-2010 is not a ISO 8601 date!')
   })
 
   /** @test {TvMazeApi#getSeasons} */
@@ -248,7 +248,7 @@ describe('TvMazeApi', () => {
   // People
   /** @test {TvMazeApi#getPerson} */
   it('should get a person', done => {
-    tvMaze.getPeople(24, 'castcredits').then(res => {
+    tvMaze.getPerson(24, 'castcredits').then(res => {
       expect(res).to.be.an('object')
       done()
     }).catch(done)
@@ -262,9 +262,9 @@ describe('TvMazeApi', () => {
     }).catch(done)
   })
 
-  /** @test {TvMazeApi#getPeopleCastCredits} */
+  /** @test {TvMazeApi#getPeopleCrewCredits} */
   it('should get the crew credits of a show', done => {
-    tvMaze.getPeopleCredits(1, 'show').then(res => {
+    tvMaze.getPeopleCrewCredits(1, 'show').then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)

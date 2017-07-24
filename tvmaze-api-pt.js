@@ -159,12 +159,11 @@ const { stringify } = require('querystring')
  * @property {!Country} country The country of the alias.
  */
 
-// module.exports = class TvMazeApi {
 /**
  * A TvMaze API wrapper for NodeJS.
  * @type {TvMazeApi}
  */
-export default class TvMazeApi { 
+module.exports = class TvMazeApi {
 
   /**
    * Create a new instance of the module.
@@ -312,7 +311,7 @@ export default class TvMazeApi {
       date
     })
   }
- 
+
   /**
    * Get the full schedule.
    * @returns {Promise<Array<Schedule>, Error>} - The promise to get a full
@@ -396,7 +395,7 @@ export default class TvMazeApi {
     TvMazeApi._checkId(id)
     return this._get(`shows/${id}/seasons`)
   }
-  
+
   /**
    * Get a list of cast members of a show.
    * @param {!number} id - The id of the show.
