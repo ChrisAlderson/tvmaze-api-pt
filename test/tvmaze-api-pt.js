@@ -36,7 +36,6 @@ describe('TvMazeApi', () => {
       .to.throw('undefined is not a valid value for id!')
   })
 
-  // Search
   /** @test {TvMazeApi#searchShows} */
   it('should search for shows', done => {
     tvMaze.searchShows(q).then(res => {
@@ -115,7 +114,6 @@ describe('TvMazeApi', () => {
       .to.throw('undefined is not a valid value for q!')
   })
 
-  // Schedule
   /** @test {TvMazeApi#getSchedule} */
   it('should get a schedule of to be aired shows', done => {
     tvMaze.getSchedule('US', '2014-12-01').then(res => {
@@ -138,7 +136,6 @@ describe('TvMazeApi', () => {
     }).catch(done)
   })
 
-  // Shows
   /** @test {TvMazeApi#getShow} */
   it('should get a show with the episodes', done => {
     tvMaze.getShow(24, 'episodes').then(res => {
@@ -245,7 +242,6 @@ describe('TvMazeApi', () => {
       .to.throw('Page needs to be a number.')
   })
 
-  // People
   /** @test {TvMazeApi#getPerson} */
   it('should get a person', done => {
     tvMaze.getPerson(24, 'castcredits').then(res => {
@@ -270,7 +266,6 @@ describe('TvMazeApi', () => {
     }).catch(done)
   })
 
-  // Updates
   /** @test {TvMazeApi#showUpdates} */
   it('should list the show update times', done => {
     tvMaze.showUpdates().then(res => {

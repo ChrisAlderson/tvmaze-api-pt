@@ -7,156 +7,156 @@ const { stringify } = require('querystring')
 /**
  * The images model.
  * @typedef {Object} Images
- * @property {!string} medium The medium image.
- * @property {!string} original The original image.
+ * @property {string} medium The medium image.
+ * @property {string} original The original image.
  */
 
 /**
  * The externals model.
  * @typedef {Object} Externals
- * @property {!number} tvrage The tvrage of the show.
- * @property {!number} thetvdb The thetvdb of the show.
- * @property {!string} imdb The imdb of the show.
+ * @property {number} tvrage The tvrage of the show.
+ * @property {number} thetvdb The thetvdb of the show.
+ * @property {string} imdb The imdb of the show.
  */
 
 /**
  * The country model.
  * @typedef {Object} Country
- * @property {!string} name 
- * @property {!string} code
- * @property {!string} timezone
+ * @property {string} name The name of the country.
+ * @property {string} code The code of the country.
+ * @property {string} timezone The timezone of the country.
  */
 
 /**
  * The network model.
  * @typedef {Object} Network
- * @property {!number} id The id of the network.
- * @property {!string} name The name of the network.
+ * @property {number} id The id of the network.
+ * @property {string} name The name of the network.
  * @property {Country} country The country of the network.
  */
 
 /**
  * The rating model.
  * @typedef {Object} Rating
- * @property {!number} average The average of the rating.
+ * @property {number} average The average of the rating.
  */
 
 /**
  * The show schedule model.
  * @typedef {Object} ShowSchedule
- * @property {!string} time The time of the show schedule.
- * @property {!Array<string>} days The days of the show schedule.
+ * @property {string} time The time of the show schedule.
+ * @property {Array<string>} days The days of the show schedule.
  */
 
 /**
  * The show model.
  * @typedef {Object} Show
- * @property {!number} id The id of the show.
- * @property {!string} url The url of the show.
- * @property {!string} name The name of the show.
- * @property {!string} type The type of the show.
- * @property {!string} language The language of the show.
- * @property {!Array<string>} genres The genres of the show.
- * @property {!string} status The status of the show.
- * @property {!number} runtime The runtime of the show.
- * @property {!string} premiered The premiered of the show.
- * @property {!string} officialSite The officialSite of the show.
- * @property {!ShowSchedule} schedule The schedule of the show.
- * @property {!Rating} rating The rating of the show.
- * @property {!number} weight The weight of the show.
- * @property {!Network} network The network of the show.
- * @property {!string} webChannel The webChannel of the show.
- * @property {!Externals} externals The externals of the show. 
- * @property {!Images} image The image of the show.
- * @property {!string} summary The summary of the show.
- * @property {!number} updated The updated of the show.
+ * @property {number} id The id of the show.
+ * @property {string} url The url of the show.
+ * @property {string} name The name of the show.
+ * @property {string} type The type of the show.
+ * @property {string} language The language of the show.
+ * @property {Array<string>} genres The genres of the show.
+ * @property {string} status The status of the show.
+ * @property {number} runtime The runtime of the show.
+ * @property {string} premiered The premiered of the show.
+ * @property {string} officialSite The officialSite of the show.
+ * @property {ShowSchedule} schedule The schedule of the show.
+ * @property {Rating} rating The rating of the show.
+ * @property {number} weight The weight of the show.
+ * @property {Network} network The network of the show.
+ * @property {string} webChannel The webChannel of the show.
+ * @property {Externals} externals The externals of the show.
+ * @property {Images} image The image of the show.
+ * @property {string} summary The summary of the show.
+ * @property {number} updated The updated of the show.
  */
 
 /**
  * The episode model.
  * @typedef {Object} Episode
- * @property {!number} id The id of the episode.
- * @property {!string} url The url of the episode.
- * @property {!string} name The name of the episode.
- * @property {!number} season The season of the episode.
- * @property {!number} number The number of the episode.
- * @property {!string} airdate The airdate of the episode.
- * @property {!string} airtime The airtime of the episode.
- * @property {!string} airstamp The airstamp of the episode.
- * @property {!string} runtime The runtime of the episode.
- * @property {!Images} image The image of the episode.
- * @property {!string} summary The summary of the episode.
+ * @property {number} id The id of the episode.
+ * @property {string} url The url of the episode.
+ * @property {string} name The name of the episode.
+ * @property {number} season The season of the episode.
+ * @property {number} number The number of the episode.
+ * @property {string} airdate The airdate of the episode.
+ * @property {string} airtime The airtime of the episode.
+ * @property {string} airstamp The airstamp of the episode.
+ * @property {string} runtime The runtime of the episode.
+ * @property {Images} image The image of the episode.
+ * @property {string} summary The summary of the episode.
  */
 
 /**
  * The schedule model.
  * @typedef {Episode} Schedule
- * @property {!number} id The id of the schedule.
- * @property {!string} url The url of the schedule.
- * @property {!string} name The name of the schedule.
- * @property {!number} season The season of the schedule.
- * @property {!number} number The number of the schedule.
- * @property {!string} airdate The airdate of the schedule.
- * @property {!string} airtime The airtime of the schedule.
- * @property {!string} airstamp The airstamp of the schedule.
- * @property {!string} runtime The runtime of the schedule.
- * @property {!Images} image The image of the schedule.
- * @property {!string} summary The summary of the schedule.
- * @property {!Show} show The show of the schedule.
+ * @property {number} id The id of the schedule.
+ * @property {string} url The url of the schedule.
+ * @property {string} name The name of the schedule.
+ * @property {number} season The season of the schedule.
+ * @property {number} number The number of the schedule.
+ * @property {string} airdate The airdate of the schedule.
+ * @property {string} airtime The airtime of the schedule.
+ * @property {string} airstamp The airstamp of the schedule.
+ * @property {string} runtime The runtime of the schedule.
+ * @property {Images} image The image of the schedule.
+ * @property {string} summary The summary of the schedule.
+ * @property {Show} show The show of the schedule.
  */
 
 /**
  * The season model.
  * @typedef {Object} Season
- * @property {!number} id The id of the season.
- * @property {!string} url The url of the season.
- * @property {!number} number The number of the season.
- * @property {!string} name The name of the season.
- * @property {!number} episodeOrder The episodeOrder of the season.
- * @property {!string} premiereDate The premiereDate of the season.
- * @property {!string} endDate The endDate of the season.
- * @property {!Network} network The network of the season.
- * @property {!string} webChannel The webChannel of the season.
- * @property {!Images} image The image of the season.
- * @property {!string} summary The summary of the season.
- * @property {!Images} image The image of the season.
+ * @property {number} id The id of the season.
+ * @property {string} url The url of the season.
+ * @property {number} number The number of the season.
+ * @property {string} name The name of the season.
+ * @property {number} episodeOrder The episodeOrder of the season.
+ * @property {string} premiereDate The premiereDate of the season.
+ * @property {string} endDate The endDate of the season.
+ * @property {Network} network The network of the season.
+ * @property {string} webChannel The webChannel of the season.
+ * @property {Images} image The image of the season.
+ * @property {string} summary The summary of the season.
+ * @property {Images} image The image of the season.
  */
 
 /**
  * The person model.
  * @typedef {Object} Person
- * @property {!number} id The id of the season.
- * @property {!string} url The url of the season.
- * @property {!string} name The name of the season.
- * @property {!Images} image The image of the schedule.
+ * @property {number} id The id of the season.
+ * @property {string} url The url of the season.
+ * @property {string} name The name of the season.
+ * @property {Images} image The image of the schedule.
  */
 
 /**
  * The cast model.
  * @typedef {Object} Cast
- * @property {!Person} person The person of the cast.
- * @property {!Person} character The character of the cast.
+ * @property {Person} person The person of the cast.
+ * @property {Person} character The character of the cast.
  */
 
 /**
  * The crew model.
  * @typedef {Object} Crew
- * @property {!string} type - The type of crew.
- * @property {!Person} person - The person of the crew.
+ * @property {string} type - The type of crew.
+ * @property {Person} person - The person of the crew.
  */
 
 /**
  * The people model.
  * @typedef {Object} People
- * @property {!number} score - The score of the people.
- * @property {!Person} person - The person of the response.
+ * @property {number} score - The score of the people.
+ * @property {Person} person - The person of the response.
  */
 
 /**
  * The alias model.
  * @typedef {Object} Alias
- * @property {!string} name The name of the alias.
- * @property {!Country} country The country of the alias.
+ * @property {string} name The name of the alias.
+ * @property {Country} country The country of the alias.
  */
 
 /**
@@ -171,7 +171,7 @@ module.exports = class TvMazeApi {
    * @param {!string} baseUrl=https://api.tvmaze.com/ - The base url of tvmaze.
    * @param {?boolean} [debug=false] - Show extra output.
    */
-  constructor({baseUrl = 'http://api.tvmaze.com/', debug = false} = {}) {
+  constructor({baseUrl = 'https://api.tvmaze.com/', debug = false} = {}) {
     /**
      * The base url of eztv.
      * @type {string}
@@ -432,7 +432,7 @@ module.exports = class TvMazeApi {
   /**
    * Get a page of shows.
    * @param {!number} page - The page of show to get.
-   * @returns {Promise<Array<Show>, Error>} - The promise to get a list of 
+   * @returns {Promise<Array<Show>, Error>} - The promise to get a list of
    * shows.
    */
   getPage(page) {
@@ -458,7 +458,7 @@ module.exports = class TvMazeApi {
    * Get the cast of a show.
    * @param {!number} id - The id of the show.
    * @param {?string} embed - Object to embed with the response.
-   * @returns {Promise<Object, Error>} - The promise to get the cast of a 
+   * @returns {Promise<Object, Error>} - The promise to get the cast of a
    * show.
    */
   getPeopleCastCredits(id, embed) {
@@ -470,7 +470,7 @@ module.exports = class TvMazeApi {
    * Get the crew of a show.
    * @param {!number} id - The id of the show.
    * @param {?string} embed - Object to embed with the response.
-   * @returns {Promise<Object, Error>} - The promise to get the crew of a 
+   * @returns {Promise<Object, Error>} - The promise to get the crew of a
    * show.
    */
   getPeopleCrewCredits(id, embed) {
