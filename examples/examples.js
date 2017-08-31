@@ -1,6 +1,6 @@
 // Import the necessary modules.
 /* eslint-disable no-console */
-const TVMazeAPI = require('../tvmaze-api-pt')
+const TVMazeAPI = require('..')
 
 // Create a new instance of the module.
 const tvMaze = new TVMazeAPI()
@@ -26,76 +26,45 @@ tvMaze.searchShows('Lost').then(res => {
   return Promise.all([tvrage, thetvdb, imdb])
 }).then(res => {
   console.log(res)
-  tvMaze.getShow({
-    id: 24,
-    embed: 'episodes'
-  })
+  return tvMaze.getShow(23, 'episodes')
 }).then(res => {
   console.log(res)
-  tvMaze.getEpisodes({
-    id: 24,
-    specials: true
-  })
+  return tvMaze.getEpisodes(24, true)
 }).then(res => {
   console.log(res)
-  tvMaze.getEpisodeByNumber({
-    id: 24,
-    season: 1,
-    episode: 1
-  })
+  return tvMaze.getEpisodeByNumber(24, 1, 1)
 }).then(res => {
   console.log(res)
-  tvMaze.getEpisodeByDate({
-    id: 24,
-    date: '2010-09-20'
-  })
+  return tvMaze.getEpisodeByDate(24, '2010-09-20')
 }).then(res => {
   console.log(res)
-  tvMaze.getSeasons({
-    id: 24
-  })
+  return tvMaze.getSeasons(24)
 }).then(res => {
   console.log(res)
-  tvMaze.getCast({
-    id: 24
-  })
+  return tvMaze.getCast(24)
 }).then(res => {
   console.log(res)
-  tvMaze.getCrew({
-    id: 24
-  })
+  return tvMaze.getCrew(24)
 }).then(res => {
   console.log(res)
-  tvMaze.getAliases({
-    id: 24
-  })
+  return tvMaze.getAliases(24)
 }).then(res => {
   console.log(res)
-  tvMaze.getPage(1)
+  return tvMaze.getPage(1)
 }).then(res => {
   console.log(res)
-  tvMaze.getPerson({
-    id: 24,
-    embed: 'episodes'
-  })
+  return tvMaze.getPerson(24, 'castcredits')
 }).then(res => {
   console.log(res)
-  tvMaze.getCastCredits({
-    id: 1,
-    embed: 'castcredits'
-  })
+  return tvMaze.getPeopleCastCredits(1, 'show')
 }).then(res => {
   console.log(res)
-  tvMaze.showUpdates()
+  return tvMaze.showUpdates()
 }).then(res => {
   console.log(res)
-  tvMaze.getSchedule({
-    country: 'US',
-    date: '2014-12-01'
-  })
+  return tvMaze.getSchedule('US', '2014-12-01')
 }).then(res => {
   console.log(res)
-  tvMaze.getFullSchedule({
-    id: 24
-  })
-}).catch(err => console.err(err))
+  return tvMaze.getFullSchedule(24)
+}).then(res => console.log(res))
+  .catch(err => console.error(err))

@@ -1,8 +1,7 @@
-'use strict'
-
 // Import the necessary modules.
 const { expect } = require('chai')
-const TvMazeApi = require('../tvmaze-api-pt')
+
+const TvMazeApi = require('..')
 
 /** @test {TvMazeApi} */
 describe('TvMazeApi', () => {
@@ -168,7 +167,7 @@ describe('TvMazeApi', () => {
   /** @test {TvMazeApi#getEpisodeByNumber} */
   it('should throw an error when getting an episode by number', () => {
     expect(
-      tvMaze.getEpisodeByNumber.bind(tvMaze, 24, undefined)
+      tvMaze.getEpisodeByNumber.bind(tvMaze, 24, undefined, undefined)
     ).to.throw('undefined is not a valid value for season!')
     expect(tvMaze.getEpisodeByNumber.bind(tvMaze, 24, 1, undefined))
       .to.throw('undefined is not a valid value for episode!')

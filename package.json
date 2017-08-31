@@ -27,7 +27,7 @@
     "tvmaze",
     "api"
   ],
-  "main": "tvmaze-api-pt.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChrisAlderson/tvmaze-api-pt.git"

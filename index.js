@@ -386,7 +386,7 @@ module.exports = class TvMazeApi {
    */
   getEpisodeByDate(id, date) {
     this._checkId(id)
-    if (!date.match(this._iso8601)) {
+    if (date && !date.match(this._iso8601)) {
       throw new Error(`${date} is not a ISO 8601 date!`)
     }
 
