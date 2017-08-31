@@ -18,12 +18,19 @@ describe('TvMazeApi', () => {
   let q
 
   /**
+   * The id to search for.
+   * @type {number}
+   */
+  let id
+
+  /**
    * Hook for setting up the TvMazeApi tests.
    * @type {Function}
    */
   before(() => {
     tvMaze = new TvMazeApi()
     q = 'Lost'
+    id = 24
   })
 
   /** @test {TvMazeApi._checkId} */
@@ -49,7 +56,10 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#singleSearchShow} */
   it('should search for a single show with episodes', done => {
-    tvMaze.singleSearchShow(q, 'episodes').then(res => {
+    tvMaze.singleSearchShow({
+      q,
+      embed: 'episodes'
+    }).then(res => {
       expect(res).to.be.an('object')
       done()
     }).catch(err => done(err))
@@ -57,7 +67,7 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#singleSearchShow} */
   it('should search for a single show without episodes', done => {
-    tvMaze.singleSearchShow(q).then(res => {
+    tvMaze.singleSearchShow({ q }).then(res => {
       expect(res).to.be.an('object')
       done()
     }).catch(err => done(err))
@@ -65,10 +75,12 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#singleSearchShow} */
   it('should throw an error when searching for a single show', () => {
-    expect(tvMaze.singleSearchShow.bind(tvMaze, undefined))
+    expect(tvMaze.singleSearchShow.bind(tvMaze, {}))
       .to.throw('undefined is not a valid value for q!')
-    expect(tvMaze.singleSearchShow.bind(tvMaze, 'faulty', 1))
-      .to.throw('1 is not a valid value for embed!')
+    expect(tvMaze.singleSearchShow.bind(tvMaze, {
+      q: 'faulty',
+      embed: 1
+    })).to.throw('1 is not a valid value for embed!')
   })
 
   /** @test {TvMazeApi#lookupShow} */
@@ -112,7 +124,10 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getSchedule} */
   it('should get a schedule of to be aired shows', done => {
-    tvMaze.getSchedule('US', '2014-12-01').then(res => {
+    tvMaze.getSchedule({
+      country: 'US',
+      date: '2014-12-01'
+    }).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)
@@ -120,13 +135,15 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getSchedule} */
   it('should throw an error when getting a schedule', () => {
-    expect(tvMaze.getSchedule.bind(tvMaze, 'US', '09-04-2014'))
-      .to.throw('09-04-2014 is not a ISO 8601 date!')
+    expect(tvMaze.getSchedule.bind(tvMaze, {
+      country: 'US',
+      date: '09-04-2014'
+    })).to.throw('09-04-2014 is not a ISO 8601 date!')
   })
 
   /** @test {TvMazeApi#getFullSchedule} */
   it('should get a full schedule', done => {
-    tvMaze.getFullSchedule(24).then(res => {
+    tvMaze.getFullSchedule(id).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)
@@ -134,7 +151,10 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getShow} */
   it('should get a show with the episodes', done => {
-    tvMaze.getShow(24, 'episodes').then(res => {
+    tvMaze.getShow({
+      id,
+      embed: 'episodes'
+    }).then(res => {
       expect(res).to.be.an('object')
       done()
     }).catch(done)
@@ -142,7 +162,10 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getEpisodes} */
   it('should get a list of episodes, with the specials', done => {
-    tvMaze.getEpisodes(24, true).then(res => {
+    tvMaze.getEpisodes({
+      id,
+      specials: true
+    }).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)
@@ -150,7 +173,10 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getEpisodes} */
   it('should get a list of episodes, without the specials', done => {
-    tvMaze.getEpisodes(24, false).then(res => {
+    tvMaze.getEpisodes({
+      id,
+      sepcials: false
+    }).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)
@@ -158,7 +184,11 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getEpisodeByNumber} */
   it('should get an episode by number', done => {
-    tvMaze.getEpisodeByNumber(24, 1, 1).then(res => {
+    tvMaze.getEpisodeByNumber({
+      id,
+      season: 1,
+      episode: 1
+    }).then(res => {
       expect(res).to.be.an('object')
       done()
     }).catch(done)
@@ -166,16 +196,24 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getEpisodeByNumber} */
   it('should throw an error when getting an episode by number', () => {
-    expect(
-      tvMaze.getEpisodeByNumber.bind(tvMaze, 24, undefined, undefined)
-    ).to.throw('undefined is not a valid value for season!')
-    expect(tvMaze.getEpisodeByNumber.bind(tvMaze, 24, 1, undefined))
-      .to.throw('undefined is not a valid value for episode!')
+    expect(tvMaze.getEpisodeByNumber.bind(tvMaze, {
+      id,
+      seaon: undefined,
+      episode: undefined
+    })).to.throw('undefined is not a valid value for season!')
+    expect(tvMaze.getEpisodeByNumber.bind(tvMaze, {
+      id,
+      season: 1,
+      episode: undefined
+    })).to.throw('undefined is not a valid value for episode!')
   })
 
   /** @test {TvMazeApi#getEpisodeByDate} */
   it('should get an episode by date', done => {
-    tvMaze.getEpisodeByDate(24, '2010-09-20').then(res => {
+    tvMaze.getEpisodeByDate({
+      id,
+      date: '2010-09-20'
+    }).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)
@@ -183,14 +221,15 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getEpisodeByDate} */
   it('should throw an error when getting an episode by date', () => {
-    expect(
-      tvMaze.getEpisodeByDate.bind(tvMaze, 24, '20-09-2010')
-    ).to.throw('20-09-2010 is not a ISO 8601 date!')
+    expect(tvMaze.getEpisodeByDate.bind(tvMaze, {
+      id,
+      date: '20-09-2010'
+    })).to.throw('20-09-2010 is not a ISO 8601 date!')
   })
 
   /** @test {TvMazeApi#getSeasons} */
   it('should get the seasons of a show', done => {
-    tvMaze.getSeasons(24).then(res => {
+    tvMaze.getSeasons(id).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)
@@ -198,7 +237,7 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getCast} */
   it('should get the cast of a show', done => {
-    tvMaze.getCast(24).then(res => {
+    tvMaze.getCast(id).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)
@@ -206,7 +245,7 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getCrew} */
   it('should get the crew members of a show', done => {
-    tvMaze.getCrew(24).then(res => {
+    tvMaze.getCrew(id).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)
@@ -214,7 +253,7 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getAliases} */
   it('should get a list of aliases of a show', done => {
-    tvMaze.getAliases(24).then(res => {
+    tvMaze.getAliases(id).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)
@@ -236,7 +275,10 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getPerson} */
   it('should get a person', done => {
-    tvMaze.getPerson(24, 'castcredits').then(res => {
+    tvMaze.getPerson({
+      id,
+      embed: 'castcredits'
+    }).then(res => {
       expect(res).to.be.an('object')
       done()
     }).catch(done)
@@ -244,7 +286,10 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getPeopleCastCredits} */
   it('should get the cast credits of a show', done => {
-    tvMaze.getPeopleCastCredits(1, 'show').then(res => {
+    tvMaze.getCastCredits({
+      id,
+      embed: 'show'
+    }).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)
@@ -252,7 +297,10 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getPeopleCrewCredits} */
   it('should get the crew credits of a show', done => {
-    tvMaze.getPeopleCrewCredits(1, 'show').then(res => {
+    tvMaze.getCrewCredits({
+      id,
+      embed: 'show'
+    }).then(res => {
       expect(res).to.be.an('array')
       done()
     }).catch(done)

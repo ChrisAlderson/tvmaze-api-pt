@@ -10,7 +10,10 @@ tvMaze.searchShows('Lost').then(res => {
   return tvMaze.searchPeople('Lost')
 }).then(res => {
   console.log(res)
-  return tvMaze.singleSearchShow('Lost')
+  return tvMaze.singleSearchShow({
+    q: 'Lost',
+    embed: 'episodes'
+  })
 }).then(res => {
   console.log(res)
 
@@ -26,16 +29,29 @@ tvMaze.searchShows('Lost').then(res => {
   return Promise.all([tvrage, thetvdb, imdb])
 }).then(res => {
   console.log(res)
-  return tvMaze.getShow(23, 'episodes')
+  return tvMaze.getShow({
+    id: 23,
+    embed: 'episodes'
+  })
 }).then(res => {
   console.log(res)
-  return tvMaze.getEpisodes(24, true)
+  return tvMaze.getEpisodes({
+    id: 24,
+    specials: true
+  })
 }).then(res => {
   console.log(res)
-  return tvMaze.getEpisodeByNumber(24, 1, 1)
+  return tvMaze.getEpisodeByNumber({
+    id: 24,
+    season: 1,
+    episode: 1
+  })
 }).then(res => {
   console.log(res)
-  return tvMaze.getEpisodeByDate(24, '2010-09-20')
+  return tvMaze.getEpisodeByDate({
+    id: 24,
+    date: '2009-09-20'
+  })
 }).then(res => {
   console.log(res)
   return tvMaze.getSeasons(24)
@@ -53,16 +69,31 @@ tvMaze.searchShows('Lost').then(res => {
   return tvMaze.getPage(1)
 }).then(res => {
   console.log(res)
-  return tvMaze.getPerson(24, 'castcredits')
+  return tvMaze.getPerson({
+    id: 24,
+    embed: 'castcredits'
+  })
 }).then(res => {
   console.log(res)
-  return tvMaze.getPeopleCastCredits(1, 'show')
+  return tvMaze.getCrewCredits({
+    id: 1,
+    embed: 'show'
+  })
+}).then(res => {
+  console.log(res)
+  return tvMaze.getCastCredits({
+    id: 1,
+    embed: 'show'
+  })
 }).then(res => {
   console.log(res)
   return tvMaze.showUpdates()
 }).then(res => {
   console.log(res)
-  return tvMaze.getSchedule('US', '2014-12-01')
+  return tvMaze.getSchedule({
+    country: 'US',
+    date: '2014-12-01'
+  })
 }).then(res => {
   console.log(res)
   return tvMaze.getFullSchedule(24)

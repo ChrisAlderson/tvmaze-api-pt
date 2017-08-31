@@ -249,12 +249,13 @@ module.exports = class TvMazeApi {
 
   /**
    * Search for a single show based on a query.
-   * @param {!string} q - The query to search for.
-   * @param {?string} embed - Objects to embed with the response.
+   * @param {!Object} config - The config object for the method.
+   * @param {!string} config.q - The query to search for.
+   * @param {?string} config.embed - Objects to embed with the response.
    * @returns {Promise<Show, Error>} - The promise to search for a single
    * show.
    */
-  singleSearchShow(q, embed) {
+  singleSearchShow({q, embed}) {
     if (!q) {
       throw new Error(`${q} is not a valid value for q!`)
     }
@@ -306,11 +307,12 @@ module.exports = class TvMazeApi {
 
   /**
    * Get a schedule based on a country and date.
-   * @param {?string} country - The country of the schedule to get.
-   * @param {?string} date - The ISO 8601 date of the schedule ot get.
+   * @param {!Object} config - The config object for the method.
+   * @param {?string} config.country - The country of the schedule to get.
+   * @param {?string} config.date - The ISO 8601 date of the schedule ot get.
    * @returns {Promise<Array<Schedule>, Error>} - The promise to get a shedule.
    */
-  getSchedule(country, date) {
+  getSchedule({country, date}) {
     if (date && !date.match(this._iso8601)) {
       throw new Error(`${date} is not a ISO 8601 date!`)
     }
@@ -332,37 +334,41 @@ module.exports = class TvMazeApi {
 
   /**
    * Get a show based on the id.
-   * @param {!number} id - The id of the show to get.
-   * @param {?string} embed - Objects to embed with the response.
+   * @param {!Object} config - The config object for the method.
+   * @param {!number} config.id - The id of the show to get.
+   * @param {?string} config.embed - Objects to embed with the response.
    * @returns {Promise<Show, Error>} - The promise to get a show.
    */
-  getShow(id, embed) {
+  getShow({id, embed}) {
     return this._getWithEmbed(`shows/${id}`, id, embed)
   }
 
   /**
    * Get a list of epiodes of a show.
-   * @param {!number} id - The id of the show.
-   * @param {?boolean} s - Include the special episodes.
+   * @param {!Object} config - The config object for the method.
+   * @param {!number} config.id - The id of the show.
+   * @param {?boolean} config.specials - Include the special episodes.
    * @returns {Promise<Array<Episode>, Episode>} - The promise to get a list
    * of episodes of a show.
    */
-  getEpisodes(id, s) {
+  getEpisodes({id, specials}) {
     this._checkId(id)
-    const specials = s ? 1 : 0
 
-    return this._get(`shows/${id}/episodes`, { specials })
+    return this._get(`shows/${id}/episodes`, {
+      specials: specials ? 1 : 0
+    })
   }
 
   /**
    * Get an episode by the id, season and episode number.
-   * @param {!number} id - The id of the show.
-   * @param {!number} season - The season of the show.
-   * @param {!number} episode - The episode of the season.
+   * @param {!Object} config - The config object for the method.
+   * @param {!number} config.id - The id of the show.
+   * @param {!number} config.season - The season of the show.
+   * @param {!number} config.episode - The episode of the season.
    * @returns {Promise<Episode, Error>} - The promise to get an episode by
    * number.
    */
-  getEpisodeByNumber(id, season, episode) {
+  getEpisodeByNumber({id, season, episode}) {
     this._checkId(id)
     if (!season) {
       throw new Error(`${season} is not a valid value for season!`)
@@ -379,12 +385,13 @@ module.exports = class TvMazeApi {
 
   /**
    * Get episodes by id and date.
-   * @param {!number} id - The id of the show.
-   * @param {!string} date - A ISO 8601 date string.
+   * @param {!Object} config - The config object for the method.
+   * @param {!number} config.id - The id of the show.
+   * @param {!string} config.date - A ISO 8601 date string.
    * @returns {Promise<Array<Episode>, Error>} - The promise to get a list of
    * episode by date.
    */
-  getEpisodeByDate(id, date) {
+  getEpisodeByDate({id, date}) {
     this._checkId(id)
     if (date && !date.match(this._iso8601)) {
       throw new Error(`${date} is not a ISO 8601 date!`)
@@ -453,33 +460,36 @@ module.exports = class TvMazeApi {
 
   /**
    * Get a person based on the id.
-   * @param {!number} id - The id of the person to get.
-   * @param {?string} embed - Object to embed with the response.
+   * @param {!Object} config - The config object for the method.
+   * @param {!number} config.id - The id of the person to get.
+   * @param {?string} config.embed - Object to embed with the response.
    * @returns {Promise<Person, Error>} - The promise to get a person.
    */
-  getPerson(id, embed) {
+  getPerson({id, embed}) {
     return this._getWithEmbed(`people/${id}`, id, embed)
   }
 
   /**
    * Get the cast of a show.
-   * @param {!number} id - The id of the show.
-   * @param {?string} embed - Object to embed with the response.
+   * @param {!Object} config - The config object for the method.
+   * @param {!number} config.id - The id of the show.
+   * @param {?string} config.embed - Object to embed with the response.
    * @returns {Promise<Object, Error>} - The promise to get the cast of a
    * show.
    */
-  getPeopleCastCredits(id, embed) {
+  getCastCredits({id, embed}) {
     return this._getWithEmbed(`people/${id}/castcredits`, id, embed)
   }
 
   /**
    * Get the crew of a show.
-   * @param {!number} id - The id of the show.
-   * @param {?string} embed - Object to embed with the response.
+   * @param {!Object} config - The config object for the method.
+   * @param {!number} config.id - The id of the show.
+   * @param {?string} config.embed - Object to embed with the response.
    * @returns {Promise<Object, Error>} - The promise to get the crew of a
    * show.
    */
-  getPeopleCrewCredits(id, embed) {
+  getCrewCredits({id, embed}) {
     return this._getWithEmbed(`people/${id}/crewcredits`, id, embed)
   }
 
