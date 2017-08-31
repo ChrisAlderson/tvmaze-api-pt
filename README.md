@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/ChrisAlderson/tvmaze-api-pt.svg?branch=master)](https://travis-ci.org/ChrisAlderson/tvmaze-api-pt)
 [![Coverage Status](https://coveralls.io/repos/github/ChrisAlderson/tvmaze-api-pt/badge.svg?branch=master)](https://coveralls.io/github/ChrisAlderson/tvmaze-api-pt?branch=master)
 [![Dependency Status](https://david-dm.org/ChrisAlderson/tvmaze-api-pt.svg)](https://david-dm.org/ChrisAlderson/tvmaze-api-pt)
-[![devDependency Status](https://david-dm.org/ChrisAlderson/tvmaze-api-pt/dev-status.svg)](https://david-dm.org/ChrisAlderson/tvmaze-api-pt#info=devDependencies)
+[![devDependency Status](https://david-dm.org/ChrisAlderson/tvmaze-api-pt/dev-status.svg)](https://david-dm.org/ChrisAlderson/tvmaze-api-pt?type=dev)
 
 An [TVMaze](http://tvmaze.com/) wrapper for NodeJS. For more information on the
 API you can check the TVMaze documentation [here](http://www.tvmaze.com/api).
@@ -20,8 +20,7 @@ npm install --save tvmaze-api-pt
 const TVMazeApi = require('tvmaze-api-pt');
 
 const tvMaze = new TVMazeApi({
-  baseUrl, // The base url of TvMaze. Defaults to 'https://api.tvmaze.com/'.
-  debug // Show extra output. Defaults to 'false'.
+  baseUrl // The base url of TvMaze. Defaults to 'https://api.tvmaze.com/'.
 })
 ```
 
