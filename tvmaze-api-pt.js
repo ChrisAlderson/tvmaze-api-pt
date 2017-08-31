@@ -1,8 +1,9 @@
-'use strict'
-
 // Import the necessary modules.
+const debug = require('debug')
 const got = require('got')
 const { stringify } = require('querystring')
+
+const { name } = require('./package')
 
 /**
  * The images model.
@@ -169,26 +170,23 @@ module.exports = class TvMazeApi {
    * Create a new instance of the module.
    * @param {!Object} config={} - The configuration object for the module.
    * @param {!string} baseUrl=https://api.tvmaze.com/ - The base url of tvmaze.
-   * @param {?boolean} [debug=false] - Show extra output.
    */
-  constructor({baseUrl = 'https://api.tvmaze.com/', debug = false} = {}) {
+  constructor({baseUrl = 'https://api.tvmaze.com/'} = {}) {
     /**
      * The base url of eztv.
      * @type {string}
      */
     this._baseUrl = baseUrl
-
     /**
      * Show extra output.
-     * @type {boolean}
+     * @type {Function}
      */
-    this._debug = debug
-
+    this._debug = debug(name)
     /**
      * Regex for checking iso8601 dates.
      * @type {RegExp}
      */
-    TvMazeApi._iso8601 = /\d{4}-\d{2}-\d{2}/
+    this._iso8601 = /\d{4}-\d{2}-\d{2}/
   }
 
   /**
@@ -197,7 +195,7 @@ module.exports = class TvMazeApi {
    * @param {!number} id - The id to check.
    * @returns {undefined}
    */
-  static _checkId(id) {
+  _checkId(id) {
     if (!id) {
       throw new Error(`${id} is not a valid value for id!`)
     }
@@ -213,15 +211,26 @@ module.exports = class TvMazeApi {
    */
   _get(endpoint, query = {}) {
     const uri = `${this._baseUrl}${endpoint}`
-
-    if (this._debug) {
-      console.warn(`Making request to: '${uri}?${stringify(query)}'`)
-    }
+    this._debug(`Making request to: '${uri}?${stringify(query)}'`)
 
     return got.get(uri, {
       query,
       json: true
-    }).then(({body}) => body)
+    }).then(({ body }) => body)
+  }
+
+  /**
+   * Send a GET request to the TvMaze API.
+   * @param {!string} endpoint - The endpoint of the API to send the request
+   * to.
+   * @param {!number} id - The id of the movie/show to get.
+   * @param {?string} embed - Objects to embed with the response.
+   * @returns {Promise<Object, Error>} - The promise to send a GET request
+   * to the TvMaze API.
+   */
+  _getWithEmbed(endpoint, id, embed) {
+    this._checkId(id)
+    return this._get(endpoint, { embed })
   }
 
   /**
@@ -302,7 +311,7 @@ module.exports = class TvMazeApi {
    * @returns {Promise<Array<Schedule>, Error>} - The promise to get a shedule.
    */
   getSchedule(country, date) {
-    if (date && !date.match(TvMazeApi._iso8601)) {
+    if (date && !date.match(this._iso8601)) {
       throw new Error(`${date} is not a ISO 8601 date!`)
     }
 
@@ -328,20 +337,19 @@ module.exports = class TvMazeApi {
    * @returns {Promise<Show, Error>} - The promise to get a show.
    */
   getShow(id, embed) {
-    TvMazeApi._checkId(id)
-    return this._get(`shows/${id}`, { embed })
+    return this._getWithEmbed(`shows/${id}`, id, embed)
   }
 
   /**
    * Get a list of epiodes of a show.
    * @param {!number} id - The id of the show.
-   * @param {?boolean} specials - Include the special episodes.
+   * @param {?boolean} s - Include the special episodes.
    * @returns {Promise<Array<Episode>, Episode>} - The promise to get a list
    * of episodes of a show.
    */
-  getEpisodes(id, specials) {
-    TvMazeApi._checkId(id)
-    specials = specials ? 1 : 0
+  getEpisodes(id, s) {
+    this._checkId(id)
+    const specials = s ? 1 : 0
 
     return this._get(`shows/${id}/episodes`, { specials })
   }
@@ -355,7 +363,7 @@ module.exports = class TvMazeApi {
    * number.
    */
   getEpisodeByNumber(id, season, episode) {
-    TvMazeApi._checkId(id)
+    this._checkId(id)
     if (!season) {
       throw new Error(`${season} is not a valid value for season!`)
     }
@@ -377,8 +385,8 @@ module.exports = class TvMazeApi {
    * episode by date.
    */
   getEpisodeByDate(id, date) {
-    TvMazeApi._checkId(id)
-    if (!date.match(TvMazeApi._iso8601)) {
+    this._checkId(id)
+    if (!date.match(this._iso8601)) {
       throw new Error(`${date} is not a ISO 8601 date!`)
     }
 
@@ -392,7 +400,7 @@ module.exports = class TvMazeApi {
    * seasons.
    */
   getSeasons(id) {
-    TvMazeApi._checkId(id)
+    this._checkId(id)
     return this._get(`shows/${id}/seasons`)
   }
 
@@ -403,7 +411,7 @@ module.exports = class TvMazeApi {
    * cast members.
    */
   getCast(id) {
-    TvMazeApi._checkId(id)
+    this._checkId(id)
     return this._get(`shows/${id}/cast`)
   }
 
@@ -414,7 +422,7 @@ module.exports = class TvMazeApi {
    * crew members.
    */
   getCrew(id) {
-    TvMazeApi._checkId(id)
+    this._checkId(id)
     return this._get(`shows/${id}/crew`)
   }
 
@@ -425,7 +433,7 @@ module.exports = class TvMazeApi {
    * aliasses of a show.
    */
   getAliases(id) {
-    TvMazeApi._checkId(id)
+    this._checkId(id)
     return this._get(`shows/${id}/akas`)
   }
 
@@ -450,8 +458,7 @@ module.exports = class TvMazeApi {
    * @returns {Promise<Person, Error>} - The promise to get a person.
    */
   getPerson(id, embed) {
-    TvMazeApi._checkId(id)
-    return this._get(`people/${id}`, { embed })
+    return this._getWithEmbed(`people/${id}`, id, embed)
   }
 
   /**
@@ -462,8 +469,7 @@ module.exports = class TvMazeApi {
    * show.
    */
   getPeopleCastCredits(id, embed) {
-    TvMazeApi._checkId(id)
-    return this._get(`people/${id}/castcredits`, { embed })
+    return this._getWithEmbed(`people/${id}/castcredits`, id, embed)
   }
 
   /**
@@ -474,8 +480,7 @@ module.exports = class TvMazeApi {
    * show.
    */
   getPeopleCrewCredits(id, embed) {
-    TvMazeApi._checkId(id)
-    return this._get(`people/${id}/crewcredits`, { embed })
+    return this._getWithEmbed(`people/${id}/crewcredits`, id, embed)
   }
 
   /**

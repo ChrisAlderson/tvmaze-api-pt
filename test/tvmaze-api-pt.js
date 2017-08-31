@@ -23,16 +23,13 @@ describe('TvMazeApi', () => {
    * @type {Function}
    */
   before(() => {
-    console.warn = () => {}
-    tvMaze = new TvMazeApi({
-      debug: true
-    })
+    tvMaze = new TvMazeApi()
     q = 'Lost'
   })
 
   /** @test {TvMazeApi._checkId} */
   it('should throw an error is there is no id', () => {
-    expect(TvMazeApi._checkId)
+    expect(tvMaze._checkId)
       .to.throw('undefined is not a valid value for id!')
   })
 
@@ -69,9 +66,9 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#singleSearchShow} */
   it('should throw an error when searching for a single show', () => {
-    expect(tvMaze.singleSearchShow.bind(tvMaze.singleSearchShow, undefined))
+    expect(tvMaze.singleSearchShow.bind(tvMaze, undefined))
       .to.throw('undefined is not a valid value for q!')
-    expect(tvMaze.singleSearchShow.bind(tvMaze.singleSearchShow, 'faulty', 1))
+    expect(tvMaze.singleSearchShow.bind(tvMaze, 'faulty', 1))
       .to.throw('1 is not a valid value for embed!')
   })
 
@@ -96,7 +93,7 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#lookupShow} */
   it('should throw an error when looking for a show', () => {
-    expect(tvMaze.lookupShow.bind(tvMaze.lookupShow, {}))
+    expect(tvMaze.lookupShow.bind(tvMaze, {}))
       .to.throw('Specify a tvrage, thetvdb or imdb id for this request')
   })
 
@@ -124,7 +121,7 @@ describe('TvMazeApi', () => {
 
   /** @test {TvMazeApi#getSchedule} */
   it('should throw an error when getting a schedule', () => {
-    expect(tvMaze.getSchedule.bind(tvMaze.getSchedule, 'US', '09-04-2014'))
+    expect(tvMaze.getSchedule.bind(tvMaze, 'US', '09-04-2014'))
       .to.throw('09-04-2014 is not a ISO 8601 date!')
   })
 
@@ -171,14 +168,10 @@ describe('TvMazeApi', () => {
   /** @test {TvMazeApi#getEpisodeByNumber} */
   it('should throw an error when getting an episode by number', () => {
     expect(
-      tvMaze.getEpisodeByNumber.bind(tvMaze.getEpisodeByNumber, 24, undefined
-      )).to.throw('undefined is not a valid value for season!')
-    expect(
-      tvMaze.getEpisodeByNumber.bind(tvMaze.getEpisodeByNumber,
-        24,
-        1,
-        undefined
-      )).to.throw('undefined is not a valid value for episode!')
+      tvMaze.getEpisodeByNumber.bind(tvMaze, 24, undefined)
+    ).to.throw('undefined is not a valid value for season!')
+    expect(tvMaze.getEpisodeByNumber.bind(tvMaze, 24, 1, undefined))
+      .to.throw('undefined is not a valid value for episode!')
   })
 
   /** @test {TvMazeApi#getEpisodeByDate} */
@@ -192,8 +185,8 @@ describe('TvMazeApi', () => {
   /** @test {TvMazeApi#getEpisodeByDate} */
   it('should throw an error when getting an episode by date', () => {
     expect(
-      tvMaze.getEpisodeByDate.bind(tvMaze.getEpisodeByDate, 24, '20-09-2010'
-      )).to.throw('20-09-2010 is not a ISO 8601 date!')
+      tvMaze.getEpisodeByDate.bind(tvMaze, 24, '20-09-2010')
+    ).to.throw('20-09-2010 is not a ISO 8601 date!')
   })
 
   /** @test {TvMazeApi#getSeasons} */

@@ -1,6 +1,5 @@
-'use strict'
-
 // Import the necessary modules.
+/* eslint-disable no-console */
 const TVMazeAPI = require('../tvmaze-api-pt')
 
 // Create a new instance of the module.
